@@ -1,60 +1,70 @@
 <!doctype html>
 <html lang="en-US">
-<head>
-  <title><%= html_title yield(:title) %></title>
-  <%= csrf_meta_tag %>
-  <%= stylesheet_link_tag 'application' %>
-  <meta name="author" content="<%= CONFIG['name'] %>">
-  <link href="/posts.rss" rel="alternate" title="RSS" type="application/rss+xml" />
-  <link href='http://fonts.googleapis.com/css?family=Lato:300,900' rel='stylesheet' type='text/css' />
-</head>
-
-<body class="<%= controller_name %> <%= action_name %>">
-  <% unless @no_header %>
-  <header>
-    <h1><%= link_to CONFIG['title'], root_url %></h1>
-    <span><%= CONFIG['tagline'].html_safe %></span>
-    <ul>
-      <% if CONFIG['twitter'] %>
-        <li><%= link_to '@' + CONFIG['twitter'], 'http://twitter.com/' + CONFIG['twitter'] %></li>
+  <head>
+    <title>
+      <% if @post %>
+        <%= @post.title %>
+      <% else %>
+        Steve Klein - Thoughts on Life, Design, Marketing and Startups
       <% end %>
-      <% if CONFIG['github'] %>
-        <li><%= link_to 'github', 'https://github.com/' + CONFIG['github'] %></li>
-      <% end %>
-      <% if CONFIG['email'] %>
-        <li><%= link_to 'email me', "mailto:#{CONFIG['email']}?subject:whats up!" %></li>
-      <% end %>
-    </ul>
+    </title>
+    <%= csrf_meta_tag %>
+    <%= stylesheet_link_tag 'application' %>
+    <meta name="author" content="<%= CONFIG['name'] %>">
+    <link href="/posts.rss" rel="alternate" title="RSS" type="application/rss+xml" />
+    <link href='http://fonts.googleapis.com/css?family=Lato:300,900' rel='stylesheet' type='text/css' />
+  </head>
 
-  </header>
-  <% end %>
-
-  <div id="container">
+  <body class="<%= controller_name %> <%= action_name %>">
     <% unless @no_header %>
-      <time>
-        <% if @post && @post.created_at %>
-          Posted <%= @post.created_at.to_formatted_s(:day_month_year) %>
-        <% else %>
-          Today is <%= Time.now.to_formatted_s(:day_month_year) %>
-          <% end %>
-      </time>
+    <header>
+      <h1><%= link_to CONFIG['title'], root_url %></h1>
+      <span><%= CONFIG['tagline'].html_safe %></span>
+      <ul>
+        <% if CONFIG['twitter'] %>
+          <li><%= link_to '@' + CONFIG['twitter'], 'http://twitter.com/' + CONFIG['twitter'] %></li>
+        <% end %>
+        <% if CONFIG['github'] %>
+          <li><%= link_to 'github', 'https://github.com/' + CONFIG['github'] %></li>
+        <% end %>
+        <% if CONFIG['email'] %>
+          <li><%= link_to 'email me', "mailto:#{CONFIG['email']}?subject:whats up!" %></li>
+        <% end %>
+      </ul>
+
+    </header>
     <% end %>
-    <div id="content">
-      <% if notice %><span class="notice"><%= notice %></span><% end %>
-      <%= yield %>
+
+    <div id="container">
+      <% unless @no_header %>
+        <time>
+          <% if @post && @post.created_at %>
+            Posted <%= @post.created_at.to_formatted_s(:day_month_year) %>
+          <% else %>
+            Today is <%= Time.now.to_formatted_s(:day_month_year) %>
+            <% end %>
+        </time>
+      <% end %>
+      <div id="content">
+        <% if notice %><span class="notice"><%= notice %></span><% end %>
+        <%= yield %>
+      </div>
     </div>
-  </div>
 
-  <%= javascript_include_tag 'application' %>
+    <%= javascript_include_tag 'application' %>
 
-  <% if CONFIG['google_analytics_id'] %>
-    <!-- Google Analytics -->
-    <script>
-      var _gaq=[['_setAccount','<%= CONFIG['google_analytics_id'] %>'],['_trackPageview']];
-      (function(d,t){var g=d.createElement(t),s=d.getElementsByTagName(t)[0];
-      g.src=('https:'==location.protocol?'//ssl':'//www')+'.google-analytics.com/ga.js';
-      s.parentNode.insertBefore(g,s)}(document,'script'));
-    </script>
-  <% end %>
-</body>
+    <% if Rails.env.live? %>
+      <script type="text/javascript">
+        var _gaq = _gaq || [];
+        _gaq.push(['_setAccount', '<%= CONFIG['GA_identifier'] %>']);
+        _gaq.push(['_trackPageview']);
+
+        (function() {
+          var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+          ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+          var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+        })();
+      </script>
+    <% end %>
+  </body>
 </html>

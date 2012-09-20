@@ -3,9 +3,9 @@ title:               Steve Klein
 tagline:             Thoughts on life, design, marketing, startups
 login:               <%= ENV["obtvse_login"] ? ENV["obtvse_login"] : "username" %>
 password:            <%= ENV["obtvse_password"] ? ENV["obtvse_password"] : "password" %>
-name:                Your name
+name:                Steve Klein
 twitter:             stevenklein  
 github:              stevenklein
 email:               stklein89@gmail.com
-google_analytics_id: YOUR_GA_ID
+GA_identifier:       UA-34959654-1
 disqus_shortname:    <%= ENV.fetch("disqus_shortname") { "" } %>
