@@ -13,6 +13,21 @@
     <meta name="author" content="<%= CONFIG['name'] %>">
     <link href="/posts.rss" rel="alternate" title="RSS" type="application/rss+xml" />
     <link href='http://fonts.googleapis.com/css?family=Lato:300,900' rel='stylesheet' type='text/css' />
+    <script type="text/javascript">
+    /* <![CDATA[ */
+        (function() {
+            var s = document.createElement('script');
+            var t = document.getElementsByTagName('script')[0];
+
+            s.type = 'text/javascript';
+            s.async = true;
+            s.src = '//api.flattr.com/js/0.6/load.js?'+
+                    'mode=auto&uid=gargamel&language=sv_SE&category=text';
+
+            t.parentNode.insertBefore(s, t);
+        })();
+    /* ]]> */
+    </script>
   </head>
 
   <body class="<%= controller_name %> <%= action_name %>">
@@ -22,7 +37,9 @@
       <span><%= CONFIG['tagline'].html_safe %></span>
       <ul>
         <% if CONFIG['twitter'] %>
-          <li><%= link_to '@' + CONFIG['twitter'], 'http://twitter.com/' + CONFIG['twitter'] %></li>
+          <li>
+            <a href="https://twitter.com/<%= CONFIG['twitter'] %>" class="twitter-follow-button" data-show-count="false" data-lang="en">Follow @<%= CONFIG['twitter'] %></a>
+          </li>
         <% end %>
         <% if CONFIG['github'] %>
           <li><%= link_to 'github', 'https://github.com/' + CONFIG['github'] %></li>
@@ -52,6 +69,8 @@
     </div>
 
     <%= javascript_include_tag 'application' %>
+
+    <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0];if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src="//platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");</script>
 
     <% if Rails.env.production? %>
       <script type="text/javascript">
