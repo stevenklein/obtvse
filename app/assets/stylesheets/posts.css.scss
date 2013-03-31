@@ -52,14 +52,14 @@ a:hover,
 }
 
 header {
-  width: 162px;
+  width: 200px;
   border-right: 1px solid #DDD;
   position: fixed;
   top: 0;
   bottom: 0;
-  padding: 20px 40px;
+  padding: 20px;
 
-  span {
+  .tagline {
     color: #888;
     font-weight: 500;
 

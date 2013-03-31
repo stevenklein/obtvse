@@ -34,11 +34,11 @@
     <% unless @no_header %>
     <header>
       <h1><%= link_to CONFIG['title'], root_url %></h1>
-      <span><%= CONFIG['tagline'].html_safe %></span>
+      <p class="tagline"><%= CONFIG['tagline'].html_safe %></p>
       <ul>
         <% if CONFIG['twitter'] %>
           <li>
-            <a href="https://twitter.com/<%= CONFIG['twitter'] %>" class="twitter-follow-button" data-show-count="false" data-lang="en">Follow @<%= CONFIG['twitter'] %></a>
+            <li><%= link_to 'twitter', 'https://twitter.com/' + CONFIG['twitter'] %></li>
           </li>
         <% end %>
         <% if CONFIG['github'] %>
@@ -48,6 +48,8 @@
           <li><%= link_to 'email me', "mailto:#{CONFIG['email']}?subject:whats up!" %></li>
         <% end %>
       </ul>
+
+      <a href="https://twitter.com/<%= CONFIG['twitter'] %>" class="twitter-follow-button" data-show-count="true" data-show-screen-name="false" data-lang="en"></a>
 
     </header>
     <% end %>

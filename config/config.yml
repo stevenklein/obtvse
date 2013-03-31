@@ -6,6 +6,7 @@ password:            <%= ENV["obtvse_password"] ? ENV["obtvse_password"] : "pass
 name:                Steve Klein
 twitter:             stevenklein  
 github:              stevenklein
+facebook:            steveklein
 email:               stklein89@gmail.com
 GA_identifier:       UA-34959654-1
 disqus_shortname:    <%= ENV.fetch("disqus_shortname") { "" } %>
