@@ -47,6 +47,9 @@
         <% if CONFIG['email'] %>
           <li><%= link_to 'email me', "mailto:#{CONFIG['email']}?subject:whats up!" %></li>
         <% end %>
+        <li>
+          <%= link_to 'StatusPage.io', 'http://www.statuspage.io' %>
+        </li>
       </ul>
 
       <a href="https://twitter.com/<%= CONFIG['twitter'] %>" class="twitter-follow-button" data-show-count="true" data-show-screen-name="false" data-lang="en"></a>
